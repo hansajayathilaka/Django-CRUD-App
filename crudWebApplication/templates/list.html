@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Show All{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <h1 class="page-header">All Details</h1>
+    <button class="btn btn-primary btn-new-emp" data-url="{% url 'newEmp' %}">
+        <span class="glyphicon glyphicon-plus"></span>
+        New Employee
+    </button>
+    <br><br>
+    <table class="table table-striped" id="emp-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>E-mail</th>
+                <th>Contact</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% include 'list_table.html' %}
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="modal-div">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

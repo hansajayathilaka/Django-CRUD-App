@@ -1,0 +1,24 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    {% include 'base_head_css.html' %}
+    {% block head %}{% endblock %}
+
+</head>
+<body>
+
+{% include 'navbar.html' %}
+
+
+{% block content %}
+{% endblock %}
+
+
+{% include 'base_js.html' %}
+
+</body>
+</html>

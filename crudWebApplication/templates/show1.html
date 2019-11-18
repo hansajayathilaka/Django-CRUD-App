@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Show All{% endblock %}
+
+{% block head %}
+<script type="text/javascript">
+    //Set up the dialog box
+    function show_dialog(pk, eId, eName, eEmail, eContact){
+        //debugger;
+
+        var dialog_content =
+            '<div>'+
+            '<div class="form-group">' +
+            '<label for="eId">ID</label>' +
+            '<input type="text" class="form-control" name="eId" id="eId" placeholder="Enter ID" value="' + eId + '"/>' +
+            '</div> <div class="form-group">' +
+            '<label for="eName">Name</label>' +
+            '<input type="email" class="form-control" name="eName" id="eName" placeholder="Enter Name"value="' + eName + '"/>' +
+            '</div>' +
+            '<div class="form-group">' +
+            '<label for="eEmail">Email address</label>' +
+            '<input type="email" class="form-control" name="eEmail" id="eEmail" placeholder="Enter email"value="' + eEmail + '"/>' +
+            '</div>' +
+            '<div class="form-group">' +
+            '<label for="eContact">Contact</label>' +
+            '<input type="text" class="form-control" name="eContact" id="eContact" placeholder="Enter Contact No"value="' + eContact + '"/>' +
+            '</div>' +
+            '</div>';
+
+        var dialog = $(dialog_content).dialog({
+            title: 'Edit Form',
+            buttons   : [
+                {
+                    text: "Save",
+                    "class": 'btn btn-success',
+                    icons: { primary: "ui-icon-check"},
+                    click: function() {
+                        
+                    }
+                },
+                {
+                    text: "Cancel",
+                    "class": 'btn btn-danger',
+                    icons: { primary: "ui-icon-close"},
+                    click: function() {
+                        $(this).dialog("close")
+                    }
+                }
+            ]
+        });
+
+        $(dialog).dialog("open");
+    }
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <p class="lead">All Details</p>
+    <hr>
+        <table class="table table-striped">
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>E-mail</th>
+                <th>Contact</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            {% for instance in queryset %}
+            <tr>
+                <td>{{ instance.eId }}</td>
+                <td>{{ instance.eName }}</td>
+                <td>{{ instance.eEmail }}</td>
+                <td>{{ instance.eContact }}</td>
+                <td><button class="btn btn-warning" id="clickMe" onclick="show_dialog({{ instance.pk }},'{{ instance.eId }}','{{ instance.eName }}', '{{ instance.eEmail }}', '{{ instance.eContact }}');">Edit</button></td>
+                <td><a href="/crud/delete/{{ instance.id }}" class="btn btn-danger">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+</div>
+
+<div id="myDialog" style="display:none;" title="Edit Form">
+    <form action="" method="POST">
+
+    </form>
+</div>
+
+
+{% endblock %}

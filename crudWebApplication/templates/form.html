@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+
+{% block content %}
+<div class="container">
+    <p class="lead">Fill the Form</p>
+    <hr>
+    <div class="row">
+        <div class="col-sm-5 col-sm-offset-3">
+<form action="{{ action }}" method="POST"> {% csrf_token %}
+    {{ form|crispy }}
+    <input class="btn btn-primary" type="submit" value="Submit">
+</form>
+        </div>
+    </div>
+</div>
+{% endblock %}

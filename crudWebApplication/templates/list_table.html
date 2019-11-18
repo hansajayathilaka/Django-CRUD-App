@@ -1,0 +1,25 @@
+{% for instance in queryset %}
+<tr>
+    <td>{{ forloop.counter }}</td>
+    <td>{{ instance.eId }}</td>
+    <td>{{ instance.eName }}</td>
+    <td>{{ instance.eEmail }}</td>
+    <td>{{ instance.eContact }}</td>
+    <td>
+        <button class="btn btn-warning btn-edit-emp" data-url="{% url 'empUpdate' instance.id %}">
+            <span class="glyphicon glyphicon-pencil"></span>
+            Edit
+        </button>
+    </td>
+    <td>
+        <button class="btn btn-danger btn-del-emp" data-url="{% url 'empDel' instance.id %}">
+            <span class="glyphicon glyphicon-trash"></span>
+            Delete
+        </button>
+    </td>
+</tr>
+{% empty %}
+<tr>
+    <td colspan="" class="text-center bg-warning">No Employee</td>
+</tr>
+{% endfor %}
